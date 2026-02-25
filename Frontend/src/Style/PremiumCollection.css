@@ -1,0 +1,496 @@
+/* Premium Collection Section Styles */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+/* Premium Collection Section Container */
+.premium-collection-section {
+  padding: 5rem 0;
+  background: linear-gradient(to bottom, #ffffff 0%, #f9fafb 30%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-collection-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(147, 51, 234, 0.2) 50%, transparent 100%);
+}
+
+.premium-collection-section::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(147, 51, 234, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Premium Collection Badge */
+.premium-collection-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  padding: 0.5rem 1rem;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%);
+  border-radius: 9999px;
+  border: 1px solid rgba(147, 51, 234, 0.15);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-collection-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.premium-collection-badge:hover::before {
+  left: 100%;
+}
+
+.premium-collection-badge:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 20px rgba(147, 51, 234, 0.2);
+  border-color: rgba(147, 51, 234, 0.3);
+}
+
+.premium-collection-badge-icon {
+  padding: 0.625rem;
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 14px rgba(147, 51, 234, 0.4);
+  transition: all 0.3s ease;
+  animation: icon-glow 2s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes icon-glow {
+  0%, 100% {
+    box-shadow: 0 4px 14px rgba(147, 51, 234, 0.3);
+  }
+  50% {
+    box-shadow: 0 4px 20px rgba(147, 51, 234, 0.5);
+  }
+}
+
+.premium-collection-badge-text {
+  color: #9333ea;
+  font-weight: 700;
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  position: relative;
+  z-index: 1;
+}
+
+/* Premium Collection Heading */
+.premium-collection-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.25rem, 5.5vw, 3.75rem);
+  font-weight: 900;
+  line-height: 1.15;
+  margin-bottom: 1.75rem;
+  color: #111827;
+  letter-spacing: -0.03em;
+  position: relative;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.premium-collection-heading-gradient {
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  position: relative;
+  display: inline-block;
+}
+
+.premium-collection-heading-gradient::after {
+  content: '';
+  position: absolute;
+  bottom: 0.25rem;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #9333ea 0%, #ec4899 100%);
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+/* Premium Collection Description */
+.premium-collection-description {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  font-weight: 400;
+  line-height: 1.85;
+  color: #4b5563;
+  margin-bottom: 2.5rem;
+  letter-spacing: 0.01em;
+  max-width: 95%;
+  position: relative;
+  padding-left: 1rem;
+  border-left: 3px solid rgba(147, 51, 234, 0.2);
+}
+
+/* Feature List */
+.premium-collection-features {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.03) 0%, rgba(236, 72, 153, 0.03) 100%);
+  border-radius: 1rem;
+  border: 1px solid rgba(147, 51, 234, 0.1);
+}
+
+@media (max-width: 768px) {
+  .premium-collection-features {
+    grid-template-columns: 1fr;
+  }
+}
+
+.premium-collection-feature {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  padding: 0.875rem 1rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 0.75rem;
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.premium-collection-feature:hover {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%);
+  transform: translateX(6px) translateY(-2px);
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.15);
+}
+
+.premium-collection-feature-icon {
+  width: 2rem;
+  height: 2rem;
+  color: #9333ea;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.12) 0%, rgba(236, 72, 153, 0.12) 100%);
+  border-radius: 50%;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.15);
+}
+
+.premium-collection-feature:hover .premium-collection-feature-icon {
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  color: white;
+  transform: scale(1.15) rotate(5deg);
+  box-shadow: 0 4px 12px rgba(147, 51, 234, 0.3);
+}
+
+.premium-collection-feature-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: #374151;
+  letter-spacing: -0.01em;
+  transition: all 0.3s ease;
+}
+
+.premium-collection-feature:hover .premium-collection-feature-text {
+  color: #9333ea;
+  font-weight: 700;
+}
+
+/* Action Buttons */
+.premium-collection-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .premium-collection-actions {
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+  }
+}
+
+.premium-collection-button-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 1.125rem 2.75rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: white;
+  background: linear-gradient(135deg, #9333ea 0%, #ec4899 100%);
+  border: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 24px rgba(147, 51, 234, 0.4);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-collection-button-primary::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.premium-collection-button-primary:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.premium-collection-button-primary:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 40px rgba(147, 51, 234, 0.5);
+  background: linear-gradient(135deg, #7e22ce 0%, #db2777 100%);
+}
+
+.premium-collection-button-primary > * {
+  position: relative;
+  z-index: 1;
+}
+
+.premium-collection-button-primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.premium-collection-button-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.125rem 2.75rem;
+  border-radius: 9999px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  color: #9333ea;
+  background: white;
+  border: 2px solid #9333ea;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(147, 51, 234, 0.1);
+}
+
+.premium-collection-button-secondary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.08) 0%, rgba(236, 72, 153, 0.08) 100%);
+  transition: left 0.4s ease;
+}
+
+.premium-collection-button-secondary:hover::before {
+  left: 0;
+}
+
+.premium-collection-button-secondary:hover {
+  border-color: #7e22ce;
+  color: #7e22ce;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(147, 51, 234, 0.25);
+}
+
+.premium-collection-button-secondary span {
+  position: relative;
+  z-index: 1;
+}
+
+.premium-collection-button-secondary span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Image Container */
+.premium-collection-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.premium-collection-image-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+}
+
+.premium-collection-image-glow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.3) 0%, rgba(236, 72, 153, 0.3) 100%);
+  border-radius: 1.5rem;
+  transform: rotate(6deg);
+  transition: transform 0.3s ease;
+  filter: blur(20px);
+  opacity: 0.6;
+}
+
+.premium-collection-image-wrapper:hover .premium-collection-image-glow {
+  transform: rotate(12deg);
+  opacity: 0.8;
+}
+
+.premium-collection-image {
+  position: relative;
+  width: 100%;
+  border-radius: 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  z-index: 1;
+}
+
+.premium-collection-image-wrapper:hover .premium-collection-image {
+  transform: scale(1.05);
+}
+
+.premium-collection-image-badge {
+  position: absolute;
+  bottom: -1.5rem;
+  right: -1.5rem;
+  background: white;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  display: none;
+  z-index: 10;
+}
+
+@media (min-width: 768px) {
+  .premium-collection-image-badge {
+    display: block;
+  }
+}
+
+.premium-collection-image-badge-content {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.premium-collection-image-badge-number {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #111827;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.premium-collection-image-badge-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Responsive Typography */
+@media (max-width: 640px) {
+  .premium-collection-heading {
+    font-size: clamp(2rem, 8vw, 3rem);
+  }
+  
+  .premium-collection-description {
+    font-size: 1.0625rem;
+    max-width: 100%;
+  }
+  
+  .premium-collection-feature-text {
+    font-size: 0.9375rem;
+  }
+  
+  .premium-collection-button-primary,
+  .premium-collection-button-secondary {
+    font-size: 1rem;
+    padding: 0.875rem 2rem;
+  }
+}
+
+/* Enhanced Text Rendering */
+.premium-collection-heading,
+.premium-collection-description,
+.premium-collection-feature-text {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Animation */
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.premium-collection-badge,
+.premium-collection-heading,
+.premium-collection-description {
+  animation: fadeInLeft 0.8s ease-out;
+}
+
+.premium-collection-description {
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .premium-collection-heading-gradient {
+    -webkit-text-fill-color: #9333ea;
+    background: none;
+  }
+  
+  .premium-collection-description {
+    color: #374151;
+  }
+  
+  .premium-collection-feature-text {
+    color: #111827;
+  }
+}
+

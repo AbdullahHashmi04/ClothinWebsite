@@ -1,0 +1,27 @@
+services:
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+
+  backend:
+    build: ./Backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mongo
+      - ollama
+    environment:
+      MONGO_URI: mongodb://mongo:27017/Credentials
+      OLLAMA_URL: http://ollama:11434
+
+  frontend:
+    build: ./Frontend
+    ports:
+      - "5173:5173"
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
