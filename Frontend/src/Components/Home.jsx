@@ -203,8 +203,8 @@ export default function HeroSlider() {
                   <div className="product-card">
                     <div className="product-card-image-container">
                       <img
-                        src={item.image}
-                        alt={item.title}
+                        src={item.imageUrl}
+                        alt={item.name}
                         className="product-card-image"
                       />
                       <div className="product-card-badge">New</div>
@@ -252,12 +252,12 @@ export default function HeroSlider() {
                     </div>
 
                     <div className="product-card-content">
-                      <p className="product-card-title">{item.title}</p>
+                      <p className="product-card-title">{item.name}</p>
                       <div className="product-card-footer">
                         <div className="product-card-price-container">
-                          <span className="product-card-price">${price}</span>
+                          <span className="product-card-price">${item.price}</span>
                           <span className="product-card-price-original">
-                            ${originalPrice}
+                            ${item.originalPrice}
                           </span>
                           {discount > 0 && (
                             <span className="product-card-discount">
