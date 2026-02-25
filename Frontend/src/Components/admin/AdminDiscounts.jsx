@@ -1,24 +1,15 @@
 import { useEffect, useState } from "react";
 import axios from 'axios'
 import "../../Style/Admin.css";
-const details = [
-  { id: "D001", code: "SUMMER25", type: "Percentage", value: 25, status: "Active", expiry: "2026-03-31" },
-  { id: "D002", code: "FLAT200", type: "Fixed Amount", value: 200,status: "Expired", expiry: "2026-01-15" },
-  { id: "D003", code: "NEWUSER10", type: "Percentage", value: 10,status: "Active", expiry: "2026-06-30" },
-  { id: "D004", code: "WEDDING50", type: "Percentage", value: 50,  status: "Active", expiry: "2026-04-15" },
-  { id: "D005", code: "FREESHIP", type: "Free Shipping", value: 0,  status: "Active", expiry: "2026-12-31" },
-  { id: "D006", code: "EID2026", type: "Percentage", value: 30,  status: "Scheduled", expiry: "2026-05-05" },
-];
-
 const statusColor = {
-  Active:    { bg: "#f0fdf4", text: "#16a34a", dot: "#22c55e" },
-  Expired:   { bg: "#fff1f2", text: "#e11d48", dot: "#f43f5e" },
+  Active: { bg: "#f0fdf4", text: "#16a34a", dot: "#22c55e" },
+  Expired: { bg: "#fff1f2", text: "#e11d48", dot: "#f43f5e" },
   Scheduled: { bg: "#fefce8", text: "#ca8a04", dot: "#facc15" },
 };
 
 const typeIcon = {
-  "Percentage":    "%",
-  "Fixed Amount":  "৳",
+  "Percentage": "%",
+  "Fixed Amount": "৳",
   "Free Shipping": "🚚",
 };
 
@@ -53,6 +44,11 @@ function Modal({ onClose, editData }) {
   const [form, setForm] = useState(editData || {
     code: "", type: "Percentage", value: "", minOrder: "", usageLimit: "", expiry: "", status: "Active"
   });
+
+  const handleCreate = async () => {
+    await axios.post("http://localhost:3000/discount", form)
+    onClose()
+  }
 
   return (
     <div style={{
@@ -140,15 +136,24 @@ function Modal({ onClose, editData }) {
             fontSize: "13.5px", fontWeight: 600, color: "#6b7280",
             cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
           }}>Cancel</button>
-          <button onClick={onClose} style={{
+          {editData ? <button onClick={onClose} style={{
             flex: 2, padding: "11px", borderRadius: "10px",
             border: "none", background: "linear-gradient(135deg,#9333ea,#c084fc)",
             fontSize: "13.5px", fontWeight: 700, color: "#fff",
             cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
             boxShadow: "0 4px 14px rgba(147,51,234,0.3)",
           }}>
-            {editData ? "Save Changes" : "Create Discount"}
-          </button>
+            Save Changes
+          </button> :
+            <button onClick={handleCreate} style={{
+              flex: 2, padding: "11px", borderRadius: "10px",
+              border: "none", background: "linear-gradient(135deg,#9333ea,#c084fc)",
+              fontSize: "13.5px", fontWeight: 700, color: "#fff",
+              cursor: "pointer", fontFamily: "'DM Sans',sans-serif",
+              boxShadow: "0 4px 14px rgba(147,51,234,0.3)",
+            }}>
+              Create Discount
+            </button>}
         </div>
       </div>
     </div>
@@ -156,28 +161,32 @@ function Modal({ onClose, editData }) {
 }
 
 export default function DiscountsPage() {
-  const [discounts, setDiscounts] = useState(details);
+  const [discounts, setDiscounts] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editItem, setEditItem] = useState(null);
   const [filterStatus, setFilterStatus] = useState("All");
-  const [totalUser , setTotalUser] = useState([])
+  const [totalUser, setTotalUser] = useState([])
 
-  useEffect(()=>{
+  useEffect(() => {
 
-    const fetch = async () =>{
+    const fetch = async () => {
 
       const res = await axios("http://localhost:3000/getcustomers")
       setTotalUser(res.data)
 
+      const res2 = await axios("http://localhost:3000/getdiscount")
+      setDiscounts(res2.data)
+
     }
+
     fetch()
 
-  },[])
+  }, [])
 
   const filtered = filterStatus === "All" ? discounts : discounts.filter(d => d.status === filterStatus);
 
-  const active    = discounts.filter(d => d.status === "Active").length;
-  const expired   = discounts.filter(d => d.status === "Expired").length;
+  const active = discounts.filter(d => d.status === "Active").length;
+  const expired = discounts.filter(d => d.status === "Expired").length;
   const scheduled = discounts.filter(d => d.status === "Scheduled").length;
 
   const handleDelete = (id) => {
@@ -203,7 +212,7 @@ export default function DiscountsPage() {
         </div>
         <button
           onClick={() => setShowModal(true)}
-         className="admin-primary-btn"
+          className="admin-primary-btn"
         >
           + Create Discount
         </button>
@@ -211,10 +220,10 @@ export default function DiscountsPage() {
 
       {/* Stat cards */}
       <div style={{ display: "flex", gap: "16px", marginBottom: "28px", flexWrap: "wrap" }}>
-        <StatCard label="Active Discounts" value={active}    badge={`${active} live`} />
-        <StatCard label="Scheduled"        value={scheduled} badge="upcoming" />
-        <StatCard label="Expired"          value={expired}   badge="inactive" />
-        <StatCard label="Total Uses"       value={totalUser.length} badge="all time" />
+        <StatCard label="Active Discounts" value={active} badge={`${active} live`} />
+        <StatCard label="Scheduled" value={scheduled} badge="upcoming" />
+        <StatCard label="Expired" value={expired} badge="inactive" />
+        <StatCard label="Total Uses" value={totalUser.length} badge="all time" />
       </div>
 
       {/* Filter tabs */}
@@ -279,7 +288,7 @@ export default function DiscountsPage() {
             >
               {/* Code */}
               <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-                <div style={{
+                {/* <div style={{
                   width: "36px", height: "36px", borderRadius: "10px",
                   background: "linear-gradient(135deg,#f5f3ff,#fdf4ff)",
                   border: "1.5px solid #e9d5ff",
@@ -287,7 +296,7 @@ export default function DiscountsPage() {
                   fontSize: "14px", flexShrink: 0,
                 }}>
                   {typeIcon[d.type]}
-                </div>
+                </div> */}
                 <div>
                   <div style={{ fontSize: "13.5px", fontWeight: 700, color: "#1a0a2e", letterSpacing: "0.04em" }}>{d.code}</div>
                   <div style={{ fontSize: "11px", color: "#c4b5d4", marginTop: "2px" }}>Expires {d.expiry}</div>
@@ -295,7 +304,7 @@ export default function DiscountsPage() {
               </div>
 
               {/* Type */}
-              <span style={{ fontSize: "12.5px", color: "#6b7280" }}>{d.type}</span>
+              <span style={{ fontSize: "12.5px", color: "#6b7280" }}>{d.expiryDate}</span>
 
               {/* Value */}
               <span style={{ fontSize: "14px", fontWeight: 700, color: "#9333ea" }}>
@@ -326,8 +335,8 @@ export default function DiscountsPage() {
                   }}
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#9333ea" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+                    <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
                   </svg>
                 </button>
 
@@ -342,9 +351,9 @@ export default function DiscountsPage() {
                   }}
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#f43f5e" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/>
-                    <path d="M10 11v6"/><path d="M14 11v6"/>
-                    <path d="M9 6V4h6v2"/>
+                    <polyline points="3 6 5 6 21 6" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" />
+                    <path d="M10 11v6" /><path d="M14 11v6" />
+                    <path d="M9 6V4h6v2" />
                   </svg>
                 </button>
               </div>

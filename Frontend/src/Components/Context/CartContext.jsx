@@ -16,22 +16,17 @@ export const CartProvider = ({ children }) => {
   const [user, setUserInfo] = useState([])
   const [productData, setProductData] = useState([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios("http://localhost:3000/trending");
-        setItems(response.data);
-      } catch (err) {
-        console.error(err);
-      };
-    }
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const response = await axios.get("http://localhost:3000/trending");
+  //     setItems(response.data);
+  //   }
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
     const fetch = async () => {
       const response = await axios.get("http://localhost:3000/products")
-      console.log(response.data)
       setProductData(response.data)
     }
     fetch();

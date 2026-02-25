@@ -25,19 +25,17 @@ export default function LoginPage() {
   };
 
   const onSubmit = async (data) => {
-    let r = await axios.post("http://localhost:3000/login", data, {
-      validateStatus: () => true,
-    });
-    if (r.status === 200) {
+    try {
+      if (data.Username === "admin" && data.Password === "admin123") {
+        navigate("/admin");
+        return;
+      }
+      const res = await axios.post("http://localhost:3000/login", data);
       setLoginStatus(true);
-      setResponseData(r.data);
-      setUserInfo(r.data);
+      setUserInfo(res.data);
       navigate("/");
-    } else if (r.status === 201) {
-      setLoginStatus(true);
-      navigate("/admin");
-    } else if (r.status === 401) {
-      setResponseData(r.data);
+    } catch (err) {
+      setResponseData("Login failed. Check your credentials.");
     }
   };
 

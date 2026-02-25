@@ -72,9 +72,12 @@ function FashionCard({ item, index }) {
   const [hovered, setHovered] = useState(false);
   const [imgError, setImgError] = useState(false);
   const cfg = categoryConfig[item.category] || defaultConfig;
-  const imgSrc = item.image_url ||
-    imageMap[item.image_keyword?.toLowerCase()] ||
-    `https://source.unsplash.com/500x600/?${encodeURIComponent(item.image_keyword || item.style)},fashion,outfit`;
+  const imageKeyword = item.image_keyword || item.image_keywords || item.style || "pakistani_fashion";
+  const cleanKeyword = encodeURIComponent(imageKeyword.trim().toLowerCase());
+  const mappedImage = imageMap[imageKeyword.toLowerCase()] || imageMap[item.style?.toLowerCase()];
+
+  const imgSrc = item.image_url || mappedImage ||
+    `https://loremflickr.com/500/600/fashion,pakistani,${cleanKeyword}?random=${index}`;
 
   return (
     <div

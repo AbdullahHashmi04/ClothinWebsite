@@ -6,6 +6,7 @@ import mongoose from "mongoose"
 import { Credentials } from "../Model/Credentials.js"
 import Product from "../Model/Product.js"
 import OrderDetails from "../Model/OrderDetails.js"
+import Discount from "../Model/Discount.js"
 import axios from "axios";
 import dotenv from "dotenv"
 import { fileURLToPath } from 'url';
@@ -15,6 +16,7 @@ import jwt from 'jsonwebtoken'
 import fs from "fs";
 import multer from "multer";
 import vtonRouter from '../Routes/tryonRoutes.js';
+import Login from '../Routes/Login.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -42,8 +44,8 @@ const googleClientSecret = process.env.GOOGLE_CLIENT_SECRET;
 const googleRedirectURI = process.env.GOOGLE_REDIRECT_URI || 'http://localhost:3000/google/callback';
 
 app.post("/signup", (req, res) => {
-  // console.log("Body req is ",req.body.item);
-  const product = new Credentials(req.body.item)
+  console.log("Body req is ", req.body);
+  const product = new Credentials(req.body)
   product.save()
   // console.log("User signed up: ",product);
   res.send("Signup Successful")
@@ -101,35 +103,6 @@ app.put('/updateProduct/:id', upload.single('image'), async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  console.log("Fetching")
-  const { Username, Password } = req.body;
-  const query1 = await Credentials.findOne({ Username: Username })
-  const query2 = await Credentials.findOne({ Password: Password })
-  const query = await Credentials.findOne({ Username: Username, Password: Password })
-  try {
-
-    if (Username === "admin" || Password === "admin123") {
-      res.status(201);
-      res.send("Admin Login Successful");
-    } else if (query) {
-      //  const token = jwt.sign(
-      //   { id: user._id, role: user.role },
-      //   process.env.JWT_SECRET,
-      //   { expiresIn: "1d" }
-      // );
-      res.status(200)
-      res.send(query)
-    }
-    else {
-      res.status(401)
-      res.send("Not Available")
-    }
-  } catch (error) {
-    res.send(`Login not Successful ${error}`);
-  }
-})
-
 app.delete('/products/:id', async (req, res) => {
   try {
     const product = await Product.findByIdAndDelete(req.params.id);
@@ -180,6 +153,45 @@ app.get('/getorders', async (req, res) => {
   const orders = await OrderDetails.find({})
   res.send(orders)
 })
+
+
+app.post('/discount', (req, res) => {
+
+  console.log(req.body)
+  const discount = new Discount(req.body);
+  discount.save();
+  res.status(200)
+  res.send("Successful")
+})
+
+app.get('/getdiscount', async (req, res) => {
+  const discounts = await Discount.find({})
+  res.send(discounts)
+})
+
+app.delete('/deletediscount/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const discount = await Discount.findByIdAndDelete(id);
+    res.json(discount)
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+})
+app.put('/updatediscount/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const discount = await Discount.findByIdAndUpdate(id, req.body, { new: true });
+    res.json(discount)
+  } catch (err) {
+    res.status(500).send(err.message);
+  }
+})
+
+
+
+
+
 
 
 // ─── Google OAuth PKCE Flow ────────────────────────────────────────────────────
@@ -290,7 +302,7 @@ app.post("/chat", async (req, res) => {
     const response = await axios.post(
       "https://openrouter.ai/api/v1/chat/completions",
       {
-        model: "openai/gpt-4o-mini",
+        model: "openai/gpt-3.5-turbo",
         messages: [
           { role: "system", content: "You are a helpful ecommerce assistant." },
           { role: "user", content: req.body.message }
@@ -320,12 +332,12 @@ Do not explain anything.
 
 Format:
 [
- { "style": "", "category": "", "image_keyword": "", "popular_in": "" }
+ { "style": "", "category": "", "image_keyword": "single_keyword_only", "popular_in": "" }
 ]
 
-Generate 30 trending clothing styles in Pakistan.`
+Generate 12 trending clothing styles in Pakistan.`
     const trend = await axios.post("https://openrouter.ai/api/v1/chat/completions", {
-      model: "openai/gpt-4o-mini",
+      model: "openai/gpt-3.5-turbo",
       messages: [
         { role: "system", content: "You are a helpful ecommerce assistant." },
         { role: "user", content: prompt }
@@ -348,6 +360,8 @@ Generate 30 trending clothing styles in Pakistan.`
 fs.mkdirSync(join(__dirname, "../uploads/temp"), { recursive: true });
 
 app.use('/uploads', express.static(join(__dirname, '../uploads')));
+
+app.use('/login', Login);
 app.use('/tryon', vtonRouter);
 
 // 404 handler

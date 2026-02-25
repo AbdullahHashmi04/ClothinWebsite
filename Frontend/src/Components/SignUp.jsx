@@ -21,23 +21,19 @@ function SignUp() {
   const password = watch("Password");
 
   const onSubmit = async (data) => {
-    let r = await axios.post("http://localhost:3000/signup", { item: data });
-    if (r.status === 200) {
+    try {
+      console.log(data)
+      await axios.post("http://localhost:3000/signup", data);
       SetRegisterStatus(true);
       Navigate("/");
+    } catch (err) {
+      console.error(err);
     }
-    console.log(data, r);
   };
 
   const handleGoogleLogin = () => {
     window.location.href = "http://localhost:3000/googleLogin";
   };
-
-  const perks = [
-    { icon: TrendingUp, title: "Curated Collections", desc: "Hand-picked styles updated weekly" },
-    { icon: Shield, title: "Secure Checkout", desc: "256-bit encrypted transactions" },
-    { icon: Truck, title: "Free Shipping", desc: "On all orders over PKR 3,000" },
-  ];
 
   return (
     <div className="flex bg-gradient-to-br from-slate-50 via-purple-50/40 to-pink-50/30" style={{ minHeight: 'calc(100vh - 5rem)' }}>

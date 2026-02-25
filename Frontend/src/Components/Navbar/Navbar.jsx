@@ -28,7 +28,7 @@ const LogoutIcon = () => (
 );
 
 function Avatar({ name, avatarUrl, size = 36 }) {
-  const initials = name.split(" ").slice(0, 2).map((n) => n[0]).join("").toUpperCase();
+  // const initials = name.split(" ").slice(0, 2).map((n) => n[0]).join("").toUpperCase();
   return (
     <div style={{
       width: size, height: size, borderRadius: "50%", overflow: "hidden",
@@ -37,7 +37,7 @@ function Avatar({ name, avatarUrl, size = 36 }) {
       fontSize: size * 0.36, fontWeight: "600", color: "#1a1410",
       fontFamily: "'DM Serif Display', Georgia, serif", flexShrink: 0, letterSpacing: "0.02em",
     }}>
-      {avatarUrl ? <img src={avatarUrl} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : initials}
+      {avatarUrl ? <img src={avatarUrl} alt={name} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div>Null</div>}
     </div>
   );
 }

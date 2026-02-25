@@ -19,10 +19,8 @@ import AdminCustomers from './Components/admin/AdminCustomers.jsx';
 import AdminDiscounts from './Components/admin/AdminDiscounts.jsx';
 import Vto from './Components/VTO/vto.jsx';
 import Trending from './Components/trendingFeature/trending.jsx';
-import Dashboard from './Components/User/Dashboard.jsx';
-import AuthCallback from './Components/AuthCallback.jsx';
-import { Auth0Context, Auth0Provider } from '@auth0/auth0-react';
-
+import Dashboard from './Components/User/Dashboard.jsx'
+import { Auth0Provider } from '@auth0/auth0-react';
 
 const router = createBrowserRouter([
   {
@@ -38,7 +36,6 @@ const router = createBrowserRouter([
       { path: "orderform", element: <OrderForm /> },
       { path: "vto", element: <Vto /> },
       { path: "trending", element: <Trending /> },
-      { path: "auth/callback", element: <AuthCallback /> },
     ],
   },
   {
@@ -61,6 +58,6 @@ createRoot(document.getElementById('root')).render(
   <Auth0Provider>
     <CartProvider>
       <RouterProvider router={router} />
-    </CartProvider>,
+    </CartProvider>
   </Auth0Provider>
 )
