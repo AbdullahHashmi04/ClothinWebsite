@@ -1,39 +1,39 @@
-import { useEffect , useState } from "react";
+import { useEffect, useState } from "react";
 import "../../Style/Admin.css";
 import axios from "axios";
 import { Link } from "lucide-react";
 
 export default function AdminDashboard() {
 
-  const[cusData , setcusData] = useState ([]);
-  const[ordersData , setOrdersData] = useState ([]);
+  const [cusData, setcusData] = useState([]);
+  const [ordersData, setOrdersData] = useState([]);
 
 
   useEffect(() => {
     const fetch = async () => {
-      let response = await axios("http://localhost:3000/getcustomers");
+      let response = await axios("http://localhost:3000/customers/getcustomers");
       setcusData(response.data);
     }
     fetch();
-  },[]);
+  }, []);
 
-  
+
   useEffect(() => {
     const fetch = async () => {
-      let response = await axios("http://localhost:3000/getorders");
+      let response = await axios("http://localhost:3000/orders/getorders");
       console.log(response.data)
       setOrdersData(response.data);
     }
     fetch();
-  },[]);
+  }, []);
 
 
   const kpis = [
-  { label: "Revenue", value: "$12,480", delta: "+8.2%" },
-  { label: "Orders", value: ordersData.length, delta: "+3.1%" },
-  { label: "Customers", value: cusData.length, delta: "+5.6%" },
-  { label: "Conversion", value: "2.9%", delta: "+0.4%" },
-];
+    { label: "Revenue", value: "$12,480", delta: "+8.2%" },
+    { label: "Orders", value: ordersData.length, delta: "+3.1%" },
+    { label: "Customers", value: cusData.length, delta: "+5.6%" },
+    { label: "Conversion", value: "2.9%", delta: "+0.4%" },
+  ];
 
 
   return (
@@ -62,9 +62,9 @@ export default function AdminDashboard() {
               <div>Status</div>
               <div className="admin-right">Total</div>
             </div>
-            {ordersData.slice(0,6).map((o) => (
+            {ordersData.slice(0, 6).map((o) => (
               <div key={o._id} className="admin-table-row">
-                <div className="admin-mono">#{o._id.slice(0,7)}</div>
+                <div className="admin-mono">#{o._id.slice(0, 7)}</div>
                 <div className="font-bold">{o.FullName}</div>
                 <div className="font-bold">{o.Status}</div>
                 <div className="flex justify-end bold">{o.Total}</div>
@@ -84,8 +84,8 @@ export default function AdminDashboard() {
 
           <div className="admin-card-title">Quick Actions</div>
           <div className="admin-actions-grid">
-          <button className="admin-action">
-             <div className="admin-action-title">Create Discount</div>
+            <button className="admin-action">
+              <div className="admin-action-title">Create Discount</div>
               <div className="admin-action-sub">Boost sales with promo codes</div>
             </button>
             <button className="admin-action" type="button">

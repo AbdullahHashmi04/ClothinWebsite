@@ -8,7 +8,7 @@ export default function AdminOrders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/getorders');
+        const response = await axios.get('http://localhost:3000/orders/getorders');
         setOrdersData(response.data);
       } catch (error) {
         console.error("Error fetching orders: ", error);
@@ -19,7 +19,7 @@ export default function AdminOrders() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:3000/deleteorder/${id}`);
+      await axios.delete(`http://localhost:3000/orders/deleteorder/${id}`);
       setOrdersData(ordersData.filter(o => o._id !== id));
     } catch (error) {
       console.error("Error deleting order: ", error);

@@ -21,6 +21,7 @@ import Vto from './Components/VTO/vto.jsx';
 import Trending from './Components/trendingFeature/trending.jsx';
 import Dashboard from './Components/User/Dashboard.jsx'
 import { Auth0Provider } from '@auth0/auth0-react';
+import AuthCallback from './Components/AuthCallBack/AuthCallback.jsx';
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
       { path: "orderform", element: <OrderForm /> },
       { path: "vto", element: <Vto /> },
       { path: "trending", element: <Trending /> },
+      { path: "auth/callback", element: <AuthCallback /> },
     ],
   },
   {

@@ -32,7 +32,7 @@ function Modal({ onClose, editData }) {
         formData.append("image", imageFile);
       }
 
-      const response = await axios.post("http://localhost:3000/addProduct", formData, {
+      const response = await axios.post("http://localhost:3000/products/addProduct", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       onClose();
@@ -52,7 +52,7 @@ function Modal({ onClose, editData }) {
         formData.append("image", imageFile);
       }
 
-      const response = await axios.put(`http://localhost:3000/updateProduct/${editData.id}`, formData, {
+      const response = await axios.put(`http://localhost:3000/products/updateProduct/${editData.id}`, formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       onClose();

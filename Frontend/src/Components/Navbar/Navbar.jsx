@@ -205,7 +205,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const fetchUserData = async () => {
-      const response = await axios("http://localhost:3000/getcustomers");
+      const response = await axios("http://localhost:3000/customers/getcustomers");
       // console.log("Response data in Navbar:", response.data.Username);
       setUsername(response.data.Username);
     };

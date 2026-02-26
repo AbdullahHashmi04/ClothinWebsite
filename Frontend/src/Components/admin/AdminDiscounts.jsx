@@ -46,7 +46,7 @@ function Modal({ onClose, editData }) {
   });
 
   const handleCreate = async () => {
-    await axios.post("http://localhost:3000/discount", form)
+    await axios.post("http://localhost:3000/discounts/createDiscount", form)
     onClose()
   }
 
@@ -171,10 +171,10 @@ export default function DiscountsPage() {
 
     const fetch = async () => {
 
-      const res = await axios("http://localhost:3000/getcustomers")
+      const res = await axios("http://localhost:3000/customers/getcustomers")
       setTotalUser(res.data)
 
-      const res2 = await axios("http://localhost:3000/getdiscount")
+      const res2 = await axios("http://localhost:3000/discounts/getDiscount")
       setDiscounts(res2.data)
 
     }
@@ -189,8 +189,9 @@ export default function DiscountsPage() {
   const expired = discounts.filter(d => d.status === "Expired").length;
   const scheduled = discounts.filter(d => d.status === "Scheduled").length;
 
-  const handleDelete = (id) => {
-    setDiscounts(prev => prev.filter(d => d.id !== id));
+  const handleDelete = async (id) => {
+    await axios.delete(`http://localhost:3000/discounts/deleteDiscount/${id}`)
+    setDiscounts(discounts.filter(d => d._id !== id));
   };
 
   return (
@@ -272,7 +273,7 @@ export default function DiscountsPage() {
           const sc = statusColor[d.status];
           return (
             <div
-              key={d.id}
+              key={d._id}
               style={{
                 display: "grid",
                 gridTemplateColumns: "1fr 120px 110px 120px 120px 110px 130px",
@@ -342,7 +343,7 @@ export default function DiscountsPage() {
 
                 {/* Delete */}
                 <button
-                  onClick={() => handleDelete(d.id)}
+                  onClick={() => handleDelete(d._id)}
                   title="Delete"
                   style={{
                     width: "32px", height: "32px", borderRadius: "8px",

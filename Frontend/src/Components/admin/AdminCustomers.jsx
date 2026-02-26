@@ -128,14 +128,14 @@ export default function AdminCustomers() {
 
   useEffect(() => {
     const fetchCustomers = async () => {
-      let response = await axios("http://localhost:3000/getcustomers");
+      let response = await axios("http://localhost:3000/customers/getcustomers");
       setData(response.data);
     }
     fetchCustomers();
   }, []);
 
   const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/deletecustomer/${id}`);
+    await axios.delete(`http://localhost:3000/customers/deletecustomer/${id}`);
     setData(data.filter(d => d._id !== id));
   }
   return (
