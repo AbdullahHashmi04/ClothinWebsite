@@ -145,7 +145,7 @@ function ProfileSection() {
           fontSize: 28, fontWeight: 700, color: "#fff", fontFamily: "'Sora',sans-serif",
           boxShadow: `0 4px 16px rgba(124,58,237,0.35)`,
           flexShrink: 0,
-        }}>NA</div>
+        }}>{user.picture ? <img src={user.picture} alt={user.Username} style={{ width: "100%", height: "100%", objectFit: "cover" }} /> : <div>NA</div>}</div>
         <div>
           <div style={{ fontWeight: 700, fontSize: 18, color: C.text, fontFamily: "'Sora',sans-serif" }}>{user.Username}</div>
           {/* <div style={{ fontSize: 13, color: C.muted, marginTop: 2 }}>Member since Jan 2024</div> */}

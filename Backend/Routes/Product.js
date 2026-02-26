@@ -5,8 +5,6 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path'
 import fs from "fs";
 
-
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const router = express.Router()
@@ -15,7 +13,7 @@ const router = express.Router()
 router.get("/", async (req, res) => {
     try {
         const products = await Product.find({});
-        res.json(products);
+        res.json({ products });
     } catch (err) {
         res.status(500).send(err.message);
     }

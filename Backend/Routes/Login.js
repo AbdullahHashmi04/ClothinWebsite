@@ -5,7 +5,6 @@ import { Credentials } from "../Model/Credentials.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-    console.log("Fetching")
     const { Username, Password } = req.body;
     const query1 = await Credentials.findOne({ Username: Username })
     const query2 = await Credentials.findOne({ Password: Password })
@@ -23,14 +22,11 @@ router.post("/", async (req, res) => {
                 process.env.JWT_SECRET,
                 { expiresIn: "1d" }
             );
-            // console.log(token)
 
-
-            const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            console.log(decoded);
+            // const decoded = jwt.verify(token, process.env.JWT_SECRET);
 
             res.status(200)
-            res.send(query)
+            res.json({ token, query })
         }
         else {
             res.status(401)

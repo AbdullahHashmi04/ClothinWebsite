@@ -16,7 +16,8 @@ import GoogleLogin from '../Auth/GoogleLogin.js'
 import GoogleCallback from '../Auth/GoogleCallback.js'
 import AdminDiscounts from '../Routes/AdminDiscount.js'
 import Customer from '../Routes/Customer.js'
-
+import AuthRoute from '../Routes/AuthRoute.js'
+import path from "path";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -35,11 +36,14 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use("/uploads", express.static(path.join(__dirname, "../uploads")));
 
 
 //Auth
 app.use('/login', Login);
 app.use("/signup", Signup);
+app.use('/user', AuthRoute)
+
 
 app.use('/googleLogin', GoogleLogin)
 app.use('/google/callback', GoogleCallback)

@@ -121,7 +121,7 @@ function UserDropdown() {
           onMouseEnter={(e) => { if (!open) { e.currentTarget.style.background = "rgba(200,168,75,0.07)"; e.currentTarget.style.borderColor = "rgba(200,168,75,0.38)"; } }}
           onMouseLeave={(e) => { if (!open) { e.currentTarget.style.background = "transparent"; e.currentTarget.style.borderColor = "rgba(200,168,75,0.22)"; } }}
         >
-          <Avatar name={user.Username} size={32} />
+          <Avatar name={user.Username} avatarUrl={user.picture} size={32} />
           <div style={{ textAlign: "left", lineHeight: 1 }}>
             <div style={{ fontSize: "13px", fontWeight: "500", fontFamily: "'DM Sans',sans-serif", color: "#1a1410", letterSpacing: "0.01em" }}>
               {user.Username}
@@ -150,7 +150,7 @@ function UserDropdown() {
               background: "linear-gradient(135deg, rgba(200,168,75,0.06) 0%, transparent 100%)",
               display: "flex", alignItems: "center", gap: "11px",
             }}>
-              <Avatar name={user.Username} size={40} />
+              <Avatar name={user.Username} avatarUrl={user.picture} size={40} />
               <div>
                 <div style={{ fontSize: "14px", fontWeight: "600", fontFamily: "'DM Serif Display',Georgia,serif", color: "#1a1410", lineHeight: 1.3 }}>
                   {user.Username}
@@ -185,7 +185,6 @@ function UserDropdown() {
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [Username, setUsername] = useState("");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { cart, RegisterStatus, loginStatus } = useContext(CartContext);
   const [open, setOpen] = useState(false);
@@ -193,7 +192,7 @@ export default function Navbar() {
 
   const ref = useRef();
 
-  const { loginWithRedirect, isAuthenticated, logout } = useAuth0();
+  const { isAuthenticated, logout } = useAuth0();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -202,15 +201,6 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      const response = await axios("http://localhost:3000/customers/getcustomers");
-      // console.log("Response data in Navbar:", response.data.Username);
-      setUsername(response.data.Username);
-    };
-    fetchUserData();
-  });
   const navLinks = [
     { path: "/", label: "Home" },
     { path: "/catalog", label: "Catalog" },

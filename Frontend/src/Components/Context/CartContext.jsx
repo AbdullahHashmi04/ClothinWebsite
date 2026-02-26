@@ -12,9 +12,10 @@ export const CartProvider = ({ children }) => {
   const [RegisterStatus, SetRegisterStatus] = useState(false);
   const [mycategory, setCategory] = useState();
   const [ImageVto, setImageVto] = useState([])
-  const [items, setItems] = useState([])
   const [user, setUserInfo] = useState([])
   const [productData, setProductData] = useState([])
+  const [items, setItems] = useState([])
+
 
   // useEffect(() => {
   //   const fetchData = async () => {
@@ -54,8 +55,9 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await axios.get("http://localhost:3000/products")
-      setCatalog(response.data);
-      setData(response.data)
+      console.log(response.data.products)
+      setCatalog(response.data.products);
+      setData(response.data.products)
     };
     fetchProducts();
   }, [])
@@ -68,8 +70,8 @@ export const CartProvider = ({ children }) => {
       value={{
         cart, addToCart, mycategory, setCategory, removeFromCart,
         clearCart, catalogData, mydata, loginStatus, setLoginStatus,
-        RegisterStatus, SetRegisterStatus, ImageVto, addVtoImage, items, user, setUserInfo, productData, setProductData,
-
+        RegisterStatus, SetRegisterStatus, ImageVto, addVtoImage, user, setUserInfo, productData, setProductData,
+        items
       }}>
       {children}
     </CartContext.Provider>

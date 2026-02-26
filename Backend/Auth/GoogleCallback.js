@@ -42,7 +42,7 @@ router.get('/', async (req, res) => {
             emailVerified: claims.email_verified,
         };
 
-        console.log('Google user authenticated:', googleUser.email);
+        // console.log('Google user authenticated:', googleUser.email);
 
         let user = await Credentials.findOne({ Email: googleUser.email });
         if (!user) {
@@ -56,11 +56,11 @@ router.get('/', async (req, res) => {
             await user.save();
         }
 
-        console.log("Passed ", user)
+        // console.log("Passed ", user)
 
         const jwtToken = jwt.sign(
             {
-                _id: user._id,
+                id: user._id,
                 Email: googleUser.email,
                 Username: googleUser.name,
                 picture: googleUser.picture,
@@ -68,11 +68,8 @@ router.get('/', async (req, res) => {
             process.env.JWT_SECRET,
             { expiresIn: '1d' }
         );
-        console.log("Token is ", jwtToken)
-
         const frontendURL = process.env.FRONTEND_URL;
-        console.log("Url is ", frontendURL)
-        res.redirect(`${frontendURL}/auth/callback?token=${jwtToken}`);
+        return res.redirect(`${frontendURL}/auth/callback?token=${jwtToken}`);
 
     } catch (e) {
         console.error('Google OAuth error:', e);

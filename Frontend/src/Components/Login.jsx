@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import CartContext from "./Context/CartContext";
 import { motion } from "framer-motion";
-import { LogIn, User, Lock, Eye, EyeOff, ShoppingBag, Sparkles, Star } from "lucide-react";
+import { LogIn, Eye, EyeOff } from "lucide-react";
 
 export default function LoginPage() {
   const [responseData, setResponseData] = useState("");
