@@ -18,6 +18,7 @@ import AdminDiscounts from '../Routes/AdminDiscount.js'
 import Customer from '../Routes/Customer.js'
 import AuthRoute from '../Routes/AuthRoute.js'
 import path from "path";
+import Feedback from "../Routes/Feedback.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -61,6 +62,10 @@ app.use('/discounts', AdminDiscounts)
 //Ai
 app.use("/chat", Chatbot)
 app.use('/trending', ClothTrending)
+
+
+//User
+app.use('/Feedback', Feedback)
 
 
 

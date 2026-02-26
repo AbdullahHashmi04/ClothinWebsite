@@ -1,4 +1,4 @@
-import { NavLink,Link, Outlet } from "react-router-dom";
+import { NavLink, Link, Outlet } from "react-router-dom";
 import "../../Style/Admin.css";
 
 const navItems = [
@@ -7,6 +7,7 @@ const navItems = [
   { to: "/admin/orders", label: "Orders" },
   { to: "/admin/customers", label: "Customers" },
   { to: "/admin/discounts", label: "Discounts" },
+  { to: "/admin/feedback", label: "Feedback" },
 ];
 
 export default function AdminLayout() {

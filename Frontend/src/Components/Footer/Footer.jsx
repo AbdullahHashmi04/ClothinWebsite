@@ -21,13 +21,13 @@ const Footer = () => {
             Elevate your wardrobe with our curated collections.
           </p>
           <div className="footer-social">
-            <a href="#" className="footer-social-link" aria-label="Instagram">
+            <a href="https://www.instagram.com/absurdhashmi/" className="footer-social-link" aria-label="Instagram">
               <Instagram className="footer-social-icon" />
             </a>
-            <a href="#" className="footer-social-link" aria-label="Facebook">
+            <a href="https://www.facebook.com/abdullahhashmi136" className="footer-social-link" aria-label="Facebook">
               <Facebook className="footer-social-icon" />
             </a>
-            <a href="#" className="footer-social-link" aria-label="Twitter">
+            <a href="https://x.com/hashmi486" className="footer-social-link" aria-label="Twitter">
               <Twitter className="footer-social-icon" />
             </a>
           </div>
@@ -58,10 +58,10 @@ const Footer = () => {
           <h3 className="footer-column-title">Customer Support</h3>
           <ul className="footer-links">
             <li><Link to="/about" className="footer-link">About Us</Link></li>
-            <li><a href="#" className="footer-link">Contact Us</a></li>
-            <li><a href="#" className="footer-link">Shipping Info</a></li>
-            <li><a href="#" className="footer-link">Returns & Refunds</a></li>
-            <li><a href="#" className="footer-link">FAQs</a></li>
+            <li><a href="https://wa.me/923135028253" className="footer-link">Contact Us</a></li>
+            <li><Link to="/shipping" className="footer-link">Shipping Info</Link></li>
+            <li><Link to="/returns" className="footer-link">Returns & Refunds</Link></li>
+            <li><Link to="/feedback" className="footer-link">Feedback</Link></li>
           </ul>
         </motion.div>
 
@@ -79,11 +79,11 @@ const Footer = () => {
             </li>
             <li className="footer-contact-item">
               <Phone className="footer-contact-icon" />
-              <span>+92 330-5495158</span>
+              <span>+92 313-5028253</span>
             </li>
             <li className="footer-contact-item">
               <Mail className="footer-contact-icon" />
-              <span>abdullahhashmi136@gmail.com</span>
+              <span>kennethjohn.miranda08.kjm@gmail.com</span>
             </li>
           </ul>
         </motion.div>

@@ -22,6 +22,8 @@ import Trending from './Components/trendingFeature/trending.jsx';
 import Dashboard from './Components/User/Dashboard.jsx'
 import { Auth0Provider } from '@auth0/auth0-react';
 import AuthCallback from './Components/AuthCallBack/AuthCallback.jsx';
+import Feedback from './Components/Feedback.jsx';
+import AdminFeedback from './Components/admin/AdminFeedback.jsx';
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,7 @@ const router = createBrowserRouter([
       { path: "vto", element: <Vto /> },
       { path: "trending", element: <Trending /> },
       { path: "auth/callback", element: <AuthCallback /> },
+      { path: "feedback", element: <Feedback /> },
     ],
   },
   {
@@ -48,7 +51,8 @@ const router = createBrowserRouter([
       { path: "products", element: <AdminProducts /> },
       { path: "orders", element: <AdminOrders /> },
       { path: "customers", element: <AdminCustomers /> },
-      { path: "discounts", element: <AdminDiscounts /> }
+      { path: "discounts", element: <AdminDiscounts /> },
+      { path: "feedback", element: <AdminFeedback /> }
     ],
   },
   {

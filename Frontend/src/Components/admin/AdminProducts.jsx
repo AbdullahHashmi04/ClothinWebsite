@@ -32,7 +32,7 @@ function Modal({ onClose, editData }) {
         formData.append("image", imageFile);
       }
 
-      const response = await axios.post("http://localhost:3000/products/addProduct", formData, {
+      await axios.post("http://localhost:3000/products/addProduct", formData, {
         headers: { "Content-Type": "multipart/form-data" }
       });
       onClose();
@@ -199,8 +199,8 @@ export default function AdminProducts() {
   const [showModal, setShowModal] = useState(false);
 
   const handleDelete = async (id) => {
-    setProductData(prev => prev.filter(d => d.id !== id));
-    const response = await axios.delete(`http://localhost:3000/products/${id}`);
+    await axios.delete(`http://localhost:3000/products/${id}`);
+    setProductData(productData.filter(d => d.id !== id));
   }
 
   return (

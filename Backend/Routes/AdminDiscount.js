@@ -4,8 +4,6 @@ const router = express.Router()
 
 
 router.post('/createDiscount', (req, res) => {
-
-    console.log(req.body)
     const discount = new Discount(req.body);
     discount.save();
     res.status(200)
