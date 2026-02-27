@@ -48,6 +48,7 @@ function Modal({ onClose, editData }) {
   const handleCreate = async () => {
     await axios.post("http://localhost:3000/discounts/createDiscount", form)
     onClose()
+    window.location.reload();
   }
 
   return (

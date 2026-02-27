@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useContext } from "react";
-import CartContext from "../Context/CartContext";
+import CartContext from "../../Context/CartContext";
 
 
 // ── Category config ───────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
-import CartContext from './Context/CartContext';
+import CartContext from '../Context/CartContext';
 import { motion } from 'framer-motion';
 import { CreditCard, MapPin, User, Phone, Mail, CheckCircle, ShieldCheck, Lock, ShoppingBag } from 'lucide-react';
 import axios from 'axios';

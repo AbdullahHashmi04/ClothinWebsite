@@ -1,6 +1,9 @@
 import express from "express";
 import jwt from "jsonwebtoken";
 import { Credentials } from "../Model/Credentials.js";
+import dotenv from "dotenv";
+dotenv.config();
+
 
 const router = express.Router();
 
@@ -24,7 +27,6 @@ router.post("/", async (req, res) => {
             );
 
             // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
             res.status(200)
             res.json({ token, query })
         }

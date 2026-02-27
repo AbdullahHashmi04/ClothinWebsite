@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, MessageSquare, Send, CheckCircle } from "lucide-react";
-import "../Style/Feedback.css";
+import "../../../Style/Feedback.css";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 

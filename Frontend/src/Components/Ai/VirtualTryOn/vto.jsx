@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import CartContext from '../Context/CartContext';
+import CartContext from '../../Context/CartContext';
 import axios from "axios"
 
 export default function Vto() {

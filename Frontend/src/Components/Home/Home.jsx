@@ -5,14 +5,14 @@ import {
   RefreshCw, Users, CheckCircle, ArrowRight, Zap, Gift,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import CartContext from "./Context/CartContext";
+import CartContext from "../Context/CartContext";
 import { Link } from "react-router-dom";
-import "../Style/FeaturedProducts.css";
-import "../Style/ProductCard.css";
-import "../Style/PremiumCollection.css";
-import "../Style/Sections.css";
-import "../Style/ViewAllButton.css";
-import "../Style/HeroSection.css";
+import "../../Style/FeaturedProducts.css";
+import "../../Style/ProductCard.css";
+import "../../Style/PremiumCollection.css";
+import "../../Style/Sections.css";
+import "../../Style/ViewAllButton.css";
+import "../../Style/HeroSection.css";
 
 const slides = [
   {

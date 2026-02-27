@@ -1,7 +1,7 @@
 import Footer from "./Footer/Footer.jsx"
 import Navbar from "./Navbar/Navbar.jsx"
 import { Outlet } from "react-router-dom"
-import Chatbot from "./Bot"
+import Chatbot from "../Components/Ai/Chatbot/Bot.jsx"
 
 // import Snowfall from "react-snowfall";
 

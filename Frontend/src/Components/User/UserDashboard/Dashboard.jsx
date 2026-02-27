@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import CartContext from "../Context/CartContext";
+import CartContext from "../../Context/CartContext";
 // ─── Design tokens matching the purple admin panel brand ──────────────────────
 const C = {
   brand: "#7C3AED",

@@ -1,8 +1,8 @@
 import React, { useState, useContext } from "react";
-import CartContext from "./Context/CartContext.jsx";
+import CartContext from "../Context/CartContext.jsx";
 import { motion, AnimatePresence } from "framer-motion";
 import { ShoppingBag, Search, Package } from "lucide-react";
-import "../Style/Catalog.css";
+import "../../Style/Catalog.css";
 import { Link } from "react-router-dom";
 
 const CATEGORIES = ["All", "men", "women", "kids"];

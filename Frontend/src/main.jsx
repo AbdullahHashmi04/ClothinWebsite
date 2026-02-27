@@ -3,26 +3,26 @@ import { createRoot } from 'react-dom/client'
 import './Style/index.css'
 import App from './Components/App.jsx'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import SignUp from './Components/SignUp.jsx';
-import Home from "./Components/Home.jsx"
-import Login from "./Components/Login.jsx"
-import Catalog from "./Components/Catalog.jsx"
+import SignUp from './Components/Validations/SignUp/SignUp.jsx';
+import Home from "./Components/Home/Home.jsx"
+import Login from "./Components/Validations/Login/Login.jsx"
+import Catalog from "./Components/ProductDetails/Catalog.jsx"
 import { CartProvider } from './Components/Context/CartContext.jsx';
-import Cart from './Components/Cart.jsx';
-import About from './Components/About.jsx';
-import OrderForm from './Components/OrderForm.jsx';
+import Cart from './Components/Cart/Cart.jsx';
+import About from './Components/About/About.jsx';
+import OrderForm from './Components/OrderForm/OrderForm.jsx';
 import AdminLayout from './Components/admin/AdminLayout.jsx';
 import AdminDashboard from './Components/admin/AdminDashboard.jsx';
 import AdminProducts from './Components/admin/AdminProducts.jsx';
 import AdminOrders from './Components/admin/AdminOrders.jsx';
 import AdminCustomers from './Components/admin/AdminCustomers.jsx';
 import AdminDiscounts from './Components/admin/AdminDiscounts.jsx';
-import Vto from './Components/VTO/vto.jsx';
-import Trending from './Components/trendingFeature/trending.jsx';
-import Dashboard from './Components/User/Dashboard.jsx'
+import Vto from './Components/Ai/VirtualTryOn/vto.jsx';
+import Trending from './Components/Ai/TrendingFeature/trending.jsx';
+import Dashboard from './Components/User/UserDashboard/Dashboard.jsx'
 import { Auth0Provider } from '@auth0/auth0-react';
 import AuthCallback from './Components/AuthCallBack/AuthCallback.jsx';
-import Feedback from './Components/Feedback.jsx';
+import Feedback from './Components/User/FeedbackForm/Feedback.jsx';
 import AdminFeedback from './Components/admin/AdminFeedback.jsx';
 
 const router = createBrowserRouter([
