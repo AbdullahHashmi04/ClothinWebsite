@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import './Style/index.css'
 import App from './Components/App.jsx'
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import SignUp from './Components/Validations/SignUp/SignUp.jsx';
+import SignUp from './Components/Validations/Signup/SignUp.jsx';
 import Home from "./Components/Home/Home.jsx"
 import Login from "./Components/Validations/Login/Login.jsx"
 import Catalog from "./Components/ProductDetails/Catalog.jsx"

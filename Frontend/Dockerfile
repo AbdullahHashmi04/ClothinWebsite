@@ -1,4 +1,4 @@
-FROM node:18
+FROM node:20.19
 
 WORKDIR /app
 
@@ -13,4 +13,4 @@ RUN npm install -g serve
 
 EXPOSE 5173
 
-CMD ["serve", "-s", "build"]
+CMD ["serve", "-s", "dist", "-l", "5173"]
