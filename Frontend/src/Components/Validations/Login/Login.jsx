@@ -32,7 +32,8 @@ export default function LoginPage() {
       }
       const res = await axios.post("http://localhost:3000/login", data);
       setLoginStatus(true);
-      setUserInfo(res.data);
+      console.log("Login successful:", res.data);
+      setUserInfo(res.data.query);
       navigate("/");
     } catch (err) {
       setResponseData("Login failed. Check your credentials.");

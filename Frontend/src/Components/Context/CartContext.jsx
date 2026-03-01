@@ -55,7 +55,7 @@ export const CartProvider = ({ children }) => {
   useEffect(() => {
     const fetchProducts = async () => {
       const response = await axios.get("http://localhost:3000/products")
-      console.log(response.data.products)
+      // console.log(response.data.products)
       setCatalog(response.data.products);
       setData(response.data.products)
     };

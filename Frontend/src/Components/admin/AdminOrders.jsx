@@ -9,6 +9,7 @@ export default function AdminOrders() {
     const fetchOrders = async () => {
       try {
         const response = await axios.get('http://localhost:3000/orders/getorders');
+        console.log(response.data);
         setOrdersData(response.data);
       } catch (error) {
         console.error("Error fetching orders: ", error);

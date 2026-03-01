@@ -1,6 +1,6 @@
 import express from 'express'
 const router = express.Router()
-import { Credentials } from '../Model/Credentials.js'
+import { Credentials } from '../../Model/Credentials.js'
 
 router.get('/getcustomers', async (req, res) => {
     const customers = await Credentials.find({})

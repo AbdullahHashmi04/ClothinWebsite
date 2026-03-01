@@ -1,5 +1,5 @@
 import express from "express"
-import Product from "../Model/Products.js"
+import Product from "../../Model/Products.js"
 import multer from "multer"
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path'

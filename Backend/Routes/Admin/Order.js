@@ -1,5 +1,5 @@
 import express from "express"
-import OrderDetails from "../Model/OrderDetails.js"
+import OrderDetails from "../../Model/OrderDetails.js"
 
 const router = express.Router()
 
@@ -10,7 +10,7 @@ router.get('/getorders', async (req, res) => {
 })
 
 
-router.post("/orders", (req, res) => {
+router.post("/createOrder", (req, res) => {
     const date = new Date().toISOString().split('T')[0];
     // console.log(req.body.data)
     const Status = "paid"
@@ -30,6 +30,16 @@ router.delete('/deleteorder/:id', async (req, res) => {
     } catch (err) {
         res.status(500).send(err.message);
     }
+})
+
+
+router.get('/getUserOrders/:Email', async (req, res) => {
+
+    console.log("Fetching orders for user: ", req.params.Email)
+    const { Email } = req.params;
+    const orders = await OrderDetails.find({ Email: Email });
+    console.log(orders)
+    res.json(orders);
 })
 
 

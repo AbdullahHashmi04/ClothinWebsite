@@ -9,33 +9,41 @@ const router = express.Router();
 
 router.post("/", async (req, res) => {
     const { Username, Password } = req.body;
-    const query1 = await Credentials.findOne({ Username: Username })
-    const query2 = await Credentials.findOne({ Password: Password })
-    const query = await Credentials.findOne({ Username: Username, Password: Password })
     try {
-
-        if (Username === "admin" || Password === "admin123") {
-            res.status(201);
-            res.send("Admin Login Successful");
-        } else if (query) {
-            console.log(query)
-            // console.log(process.env.JWT_SECRET)
-            const token = jwt.sign(
-                { id: query._id },
-                process.env.JWT_SECRET,
-                { expiresIn: "1d" }
-            );
-
-            // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-            res.status(200)
-            res.json({ token, query })
+        const user = await Credentials.findOne({ Username });
+        if (!user) {
+            return res.status(401).json({ message: "Invalid credentials" });
         }
-        else {
-            res.status(401)
-            res.send("Not Available")
+
+        // Handle both legacy plaintext and bcrypt-hashed passwords
+        let isMatch = false;
+        if (user.Password && user.Password.startsWith("$2")) {
+            isMatch = await user.comparePassword(Password);
+        } else {
+            // Legacy plaintext password — verify then upgrade to bcrypt
+            isMatch = user.Password === Password;
+            if (isMatch) {
+                user.Password = Password;
+                await user.save(); // pre-save hook hashes it
+            }
         }
+
+        if (!isMatch) {
+            return res.status(401).json({ message: "Invalid credentials" });
+        }
+
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "1d" }
+        );
+
+        const userResponse = user.toObject();
+        delete userResponse.Password;
+
+        res.status(200).json({ token, query: userResponse });
     } catch (error) {
-        res.send(`Login not Successful ${error}`);
+        res.status(500).json({ message: "Login failed", error: error.message });
     }
 })
 

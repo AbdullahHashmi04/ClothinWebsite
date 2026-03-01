@@ -7,12 +7,13 @@ import axios from 'axios';
 
 const OrderForm = () => {
   const { cart, clearCart } = useContext(CartContext);
+  const { user } = useContext(CartContext);
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
     try {
       console.log("Data is coming again", data)
-      const res = await axios.post("http://localhost:3000/orders", { data });
+      const res = await axios.post("http://localhost:3000/orders/createOrder", { data });
       if (res.status === 200) {
         console.log("Response successful", res)
         // clearCart();
@@ -79,6 +80,7 @@ const OrderForm = () => {
                         {...register("FullName", { required: "Full name is required" })}
                         className={inputClassName}
                         placeholder="John Doe"
+                        value={user ? user.Username : ""}
                       />
                     </div>
                     {errors.FullName && <p className="text-red-500 text-xs font-semibold mt-2">{errors.FullName.message}</p>}
@@ -101,7 +103,9 @@ const OrderForm = () => {
                         })}
                         className={inputClassName}
                         placeholder="john@example.com"
-                      />
+                        value={user ? user.Email : ""}
+                        />
+
                     </div>
                     {errors.Email && <p className="text-red-500 text-xs font-semibold mt-2">{errors.Email.message}</p>}
                   </div>
@@ -117,6 +121,7 @@ const OrderForm = () => {
                         {...register("Phone", { required: "Phone number is required" })}
                         className={inputClassName}
                         placeholder="+1 (555) 123-4567"
+                        value={user ? user.Phone : ""}
                       />
                     </div>
                     {errors.Phone && <p className="text-red-500 text-xs font-semibold mt-2">{errors.Phone.message}</p>}
@@ -128,6 +133,7 @@ const OrderForm = () => {
                       {...register("Address", { required: "Address is required" })}
                       className={`${inputClassNameNoIcon} resize-none h-28`}
                       placeholder="123 Main St, Apt 4B, City, State, ZIP"
+                      value={user ? user.Address : ""}
                     />
                     {errors.Address && <p className="text-red-500 text-xs font-semibold mt-2">{errors.Address.message}</p>}
                   </div>

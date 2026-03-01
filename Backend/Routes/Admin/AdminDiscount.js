@@ -1,4 +1,4 @@
-import Discount from '../Model/Discount.js'
+import Discount from '../../Model/Discount.js'
 import express from 'express'
 const router = express.Router()
 

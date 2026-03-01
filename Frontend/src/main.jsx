@@ -19,7 +19,15 @@ import AdminCustomers from './Components/admin/AdminCustomers.jsx';
 import AdminDiscounts from './Components/admin/AdminDiscounts.jsx';
 import Vto from './Components/Ai/VirtualTryOn/vto.jsx';
 import Trending from './Components/Ai/TrendingFeature/trending.jsx';
-import Dashboard from './Components/User/UserDashboard/Dashboard.jsx'
+import UserLayout from './Components/User/UserDashboard/UserLayout.jsx'
+import UserProfile from './Components/User/UserDashboard/UserProfile.jsx'
+import UserOrders from './Components/User/UserDashboard/UserOrders.jsx'
+import UserReturns from './Components/User/UserDashboard/UserReturns.jsx'
+import UserWishlist from './Components/User/UserDashboard/UserWishlist.jsx'
+import UserCart from './Components/User/UserDashboard/UserCart.jsx'
+import UserLoyalty from './Components/User/UserDashboard/UserLoyalty.jsx'
+import UserAddresses from './Components/User/UserDashboard/UserAddresses.jsx'
+import UserCheckout from './Components/User/UserDashboard/UserCheckout.jsx'
 import { Auth0Provider } from '@auth0/auth0-react';
 import AuthCallback from './Components/AuthCallBack/AuthCallback.jsx';
 import Feedback from './Components/User/FeedbackForm/Feedback.jsx';
@@ -57,7 +65,17 @@ const router = createBrowserRouter([
   },
   {
     path: "/userDashboard",
-    element: <Dashboard />,
+    element: <UserLayout />,
+    children: [
+      { index: true, element: <UserProfile /> },
+      { path: "orders", element: <UserOrders /> },
+      { path: "returns", element: <UserReturns /> },
+      { path: "wishlist", element: <UserWishlist /> },
+      { path: "cart", element: <UserCart /> },
+      { path: "loyalty", element: <UserLoyalty /> },
+      { path: "addresses", element: <UserAddresses /> },
+      { path: "checkout", element: <UserCheckout /> },
+    ],
   }
 ]);
 createRoot(document.getElementById('root')).render(

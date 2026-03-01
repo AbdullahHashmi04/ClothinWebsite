@@ -176,6 +176,55 @@ function SignUp() {
               )}
             </div>
 
+
+
+
+   {/* Phone */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Phone: <span className="font-light ">(Optional)</span></label>
+              <div className="relative">
+                <input
+                  type="tel"
+                  placeholder="+92 (555) 123-4567"
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-purple-400 focus:ring-2 focus:ring-purple-100 outline-none transition-all duration-200"
+                  style={{ minHeight: '48px' }}
+                />
+              </div>
+              {errors.Phone && (
+                <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.Phone.message}</p>
+              )}
+            </div>
+
+
+
+   {/* Address */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1.5">Address: <span className="font-light ">(Optional)</span></label>
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Enter your address"
+                  className="w-full pl-11 pr-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:bg-white focus:border-purple-400 focus:ring-2 focus:ring-purple-100 outline-none transition-all duration-200"
+                  style={{ minHeight: '48px' }}
+                />
+              </div>
+              {errors.Address && (
+                <p className="text-red-500 text-xs mt-1.5 ml-1">{errors.Address.message}</p>
+              )}
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
             {/* Submit */}
             <button
               type="submit"
