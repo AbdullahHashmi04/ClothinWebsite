@@ -6,19 +6,21 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path'
-import Products from "../Routes/Product.js"
-import Order from "../Routes/Order.js"
+import Products from "../Routes/Admin/Product.js"
+import Order from "../Routes/Admin/Order.js"
 import Login from '../Routes/Login.js';
 import Chatbot from '../ExternalApi/Chatbot.js';
 import Signup from '../Routes/Signup.js'
 import ClothTrending from '../ExternalApi/ClothTrending.js'
 import GoogleLogin from '../Auth/GoogleLogin.js'
 import GoogleCallback from '../Auth/GoogleCallback.js'
-import AdminDiscounts from '../Routes/AdminDiscount.js'
-import Customer from '../Routes/Customer.js'
+import AdminDiscounts from '../Routes/Admin/AdminDiscount.js'
+import Customer from '../Routes/Admin/Customer.js'
 import AuthRoute from '../Routes/AuthRoute.js'
 import path from "path";
 import Feedback from "../Routes/Feedback.js"
+import { adminOnly } from "../Middleware/adminMiddleware.js"
+import { authMiddleware } from "../Middleware/authMiddle.js"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,6 +50,7 @@ app.use('/user', AuthRoute)
 
 app.use('/googleLogin', GoogleLogin)
 app.use('/google/callback', GoogleCallback)
+
 
 
 //Admin
